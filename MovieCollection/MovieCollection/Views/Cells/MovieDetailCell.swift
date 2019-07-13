@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieDetailCell: UICollectionViewCell {
 
@@ -15,8 +16,8 @@ class MovieDetailCell: UICollectionViewCell {
     
     var movie: Movie! {
         didSet {
-            print("movie = \(movie)")
             movieNameLabel.text = movie.title
+            movieImageView.kf.setImage(with: URL(string: movie.url))
         }
     }
     
