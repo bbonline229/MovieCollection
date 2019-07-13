@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		0411875D22D96C9600C1931E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411875C22D96C9600C1931E /* AppDelegate.swift */; };
-		0411875F22D96C9600C1931E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411875E22D96C9600C1931E /* ViewController.swift */; };
 		0411876422D96C9800C1931E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0411876322D96C9800C1931E /* Assets.xcassets */; };
 		0411876722D96C9800C1931E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0411876522D96C9800C1931E /* LaunchScreen.storyboard */; };
 		0411877022D970B400C1931E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411876F22D970B400C1931E /* Movie.swift */; };
+		0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877222D9750F00C1931E /* MovieCollectionVC.swift */; };
+		0411877522D9750F00C1931E /* MovieCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411877322D9750F00C1931E /* MovieCollectionVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0411875922D96C9600C1931E /* MovieCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0411875C22D96C9600C1931E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0411875E22D96C9600C1931E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0411876322D96C9800C1931E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0411876622D96C9800C1931E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0411876822D96C9800C1931E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0411876F22D970B400C1931E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		0411877222D9750F00C1931E /* MovieCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionVC.swift; sourceTree = "<group>"; };
+		0411877322D9750F00C1931E /* MovieCollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +56,9 @@
 		0411875B22D96C9600C1931E /* MovieCollection */ = {
 			isa = PBXGroup;
 			children = (
+				0411877122D974C500C1931E /* Controllers */,
 				0411876E22D9708E00C1931E /* Models */,
 				0411875C22D96C9600C1931E /* AppDelegate.swift */,
-				0411875E22D96C9600C1931E /* ViewController.swift */,
 				0411876322D96C9800C1931E /* Assets.xcassets */,
 				0411876522D96C9800C1931E /* LaunchScreen.storyboard */,
 				0411876822D96C9800C1931E /* Info.plist */,
@@ -70,6 +72,15 @@
 				0411876F22D970B400C1931E /* Movie.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0411877122D974C500C1931E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0411877222D9750F00C1931E /* MovieCollectionVC.swift */,
+				0411877322D9750F00C1931E /* MovieCollectionVC.xib */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +143,7 @@
 			files = (
 				0411876722D96C9800C1931E /* LaunchScreen.storyboard in Resources */,
 				0411876422D96C9800C1931E /* Assets.xcassets in Resources */,
+				0411877522D9750F00C1931E /* MovieCollectionVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0411875F22D96C9600C1931E /* ViewController.swift in Sources */,
 				0411875D22D96C9600C1931E /* AppDelegate.swift in Sources */,
+				0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */,
 				0411877022D970B400C1931E /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
