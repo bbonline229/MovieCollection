@@ -9,7 +9,11 @@
 import Foundation
 
 struct MovieCollection: Codable {
-    let images: [Movie]
+    let movieData: [Movie]
+    
+    private enum CodingKeys: String, CodingKey {
+        case movieData = "images"
+    }
 }
 
 struct Movie: Codable {

@@ -13,9 +13,18 @@ class MovieDetailCell: UICollectionViewCell {
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
+    var movie: Movie! {
+        didSet {
+            print("movie = \(movie)")
+            movieNameLabel.text = movie.title
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
     }
 
 }

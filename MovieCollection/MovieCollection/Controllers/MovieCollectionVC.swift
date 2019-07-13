@@ -38,12 +38,19 @@ class MovieCollectionVC: UIViewController {
         }
     }
     
+    var movieData: [Movie] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     private let netWorkService = NetWorkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
+        setupCollectionView()
         setupPageControl(ishidden: false)
         
         requestMovies()
@@ -67,8 +74,11 @@ class MovieCollectionVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true
+        collectionView.register(UINib(nibName: "MovieDetailCell", bundle: nil), forCellWithReuseIdentifier: "MovieDetailCell")
         collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -92,9 +102,12 @@ class MovieCollectionVC: UIViewController {
         let resource = Resource<MovieCollection>(url: url)
         
         netWorkService.load(resource: resource) { [weak self] (movie) in
-            print(movie)
+            guard let movie = movie else { return }
+            
+            DispatchQueue.main.async {
+                self?.movieData = movie.movieData
+            }
         }
-        
     }
     
     @objc private func toggleToPreviousPage() {
@@ -105,4 +118,31 @@ class MovieCollectionVC: UIViewController {
         
     }
 
+}
+
+extension MovieCollectionVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movieData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieDetailCell", for: indexPath) as! MovieDetailCell
+        cell.movie = movieData[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        let x = scrollView.contentOffset.x
+//        let w = scrollView.bounds.size.width
+//        let currentPage = Int(ceil(x/w))
+//        num = currentPage
+//    }
 }
