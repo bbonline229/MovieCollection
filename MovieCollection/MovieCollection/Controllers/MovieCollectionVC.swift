@@ -34,12 +34,15 @@ class MovieCollectionVC: UIViewController {
     
     var currentPage: Int = 0 {
         didSet {
-            
+            collectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0), at: .centeredHorizontally, animated: true)
+            pageControl.currentPage = currentPage
+            self.currentPageLabel.text = "\(currentPage + 1) of \(movieData.count)"
         }
     }
     
     var movieData: [Movie] = [] {
         didSet {
+            print(movieData)
             collectionView.reloadData()
         }
     }
@@ -83,6 +86,7 @@ class MovieCollectionVC: UIViewController {
     }
     
     private func setupPageControl(ishidden: Bool) {
+        pageControl.numberOfPages = movieData.count
         pageControl.isHidden = ishidden
         pageControlHeight.constant = ishidden ? 0 : 20
         
@@ -105,22 +109,28 @@ class MovieCollectionVC: UIViewController {
             guard let movie = movie else { return }
             
             DispatchQueue.main.async {
+                self?.pageControl.numberOfPages = movie.movieData.count
+                self?.currentPageLabel.text = "1 of \(movie.movieData.count)"
                 self?.movieData = movie.movieData
             }
         }
     }
     
     @objc private func toggleToPreviousPage() {
-        
+        if currentPage == 0 { return }
+        currentPage -= 1
     }
     
     @objc private func toggleToNextPage() {
-        
+        if currentPage == movieData.count - 1 {
+            return
+        }
+        currentPage += 1
     }
 
 }
 
-extension MovieCollectionVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MovieCollectionVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movieData.count
     }
@@ -130,7 +140,9 @@ extension MovieCollectionVC: UICollectionViewDataSource, UICollectionViewDelegat
         cell.movie = movieData[indexPath.row]
         return cell
     }
-    
+}
+
+extension MovieCollectionVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
@@ -139,10 +151,10 @@ extension MovieCollectionVC: UICollectionViewDataSource, UICollectionViewDelegat
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
     
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        let x = scrollView.contentOffset.x
-//        let w = scrollView.bounds.size.width
-//        let currentPage = Int(ceil(x/w))
-//        num = currentPage
-//    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let x = scrollView.contentOffset.x
+        let w = scrollView.bounds.size.width
+        let currentPage = Int(ceil(x/w))
+        self.currentPage = currentPage
+    }
 }
