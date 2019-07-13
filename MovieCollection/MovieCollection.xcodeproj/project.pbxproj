@@ -14,6 +14,7 @@
 		0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877222D9750F00C1931E /* MovieCollectionVC.swift */; };
 		0411877522D9750F00C1931E /* MovieCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411877322D9750F00C1931E /* MovieCollectionVC.xib */; };
 		0411877822D97CEB00C1931E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877722D97CEB00C1931E /* UIColor+Extension.swift */; };
+		0411877A22D9806E00C1931E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877922D9806E00C1931E /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0411877222D9750F00C1931E /* MovieCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionVC.swift; sourceTree = "<group>"; };
 		0411877322D9750F00C1931E /* MovieCollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionVC.xib; sourceTree = "<group>"; };
 		0411877722D97CEB00C1931E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		0411877922D9806E00C1931E /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				0411877722D97CEB00C1931E /* UIColor+Extension.swift */,
+				0411877922D9806E00C1931E /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				0411875D22D96C9600C1931E /* AppDelegate.swift in Sources */,
 				0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */,
 				0411877022D970B400C1931E /* Movie.swift in Sources */,
+				0411877A22D9806E00C1931E /* UIView+Extension.swift in Sources */,
 				0411877822D97CEB00C1931E /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
