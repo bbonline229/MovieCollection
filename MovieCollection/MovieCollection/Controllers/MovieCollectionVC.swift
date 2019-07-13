@@ -17,6 +17,7 @@ class MovieCollectionVC: UIViewController {
     private let previousButton: UIButton = {
         let button = UIButton()
         button.setTitle("上一頁", for: .normal)
+        button.backgroundColor = .crazyBlue
         button.addTarget(self, action: #selector(toggleToPreviousPage), for: .touchUpInside)
         return button
     }()
@@ -24,6 +25,7 @@ class MovieCollectionVC: UIViewController {
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("下一頁", for: .normal)
+        button.backgroundColor = .crazyBlue
         button.addTarget(self, action: #selector(toggleToNextPage), for: .touchUpInside)
         return button
     }()

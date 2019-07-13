@@ -13,6 +13,7 @@
 		0411877022D970B400C1931E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411876F22D970B400C1931E /* Movie.swift */; };
 		0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877222D9750F00C1931E /* MovieCollectionVC.swift */; };
 		0411877522D9750F00C1931E /* MovieCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411877322D9750F00C1931E /* MovieCollectionVC.xib */; };
+		0411877822D97CEB00C1931E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411877722D97CEB00C1931E /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0411876F22D970B400C1931E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		0411877222D9750F00C1931E /* MovieCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionVC.swift; sourceTree = "<group>"; };
 		0411877322D9750F00C1931E /* MovieCollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionVC.xib; sourceTree = "<group>"; };
+		0411877722D97CEB00C1931E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		0411875B22D96C9600C1931E /* MovieCollection */ = {
 			isa = PBXGroup;
 			children = (
+				0411877622D97B4700C1931E /* Extensions */,
 				0411877122D974C500C1931E /* Controllers */,
 				0411876E22D9708E00C1931E /* Models */,
 				0411875C22D96C9600C1931E /* AppDelegate.swift */,
@@ -81,6 +84,14 @@
 				0411877322D9750F00C1931E /* MovieCollectionVC.xib */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0411877622D97B4700C1931E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0411877722D97CEB00C1931E /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +168,7 @@
 				0411875D22D96C9600C1931E /* AppDelegate.swift in Sources */,
 				0411877422D9750F00C1931E /* MovieCollectionVC.swift in Sources */,
 				0411877022D970B400C1931E /* Movie.swift in Sources */,
+				0411877822D97CEB00C1931E /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
