@@ -38,11 +38,15 @@ class MovieCollectionVC: UIViewController {
         }
     }
     
+    private let netWorkService = NetWorkService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         setupPageControl(ishidden: false)
+        
+        requestMovies()
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,6 +85,16 @@ class MovieCollectionVC: UIViewController {
         
         previousButton.anchor(top: containView.topAnchor, leading: containView.leadingAnchor, bottom: containView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: containView.bounds.width / 2, height: 0))
         nextButton.anchor(top: containView.topAnchor, leading: previousButton.trailingAnchor, bottom: containView.bottomAnchor, trailing: containView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 0))
+    }
+    
+    private func requestMovies() {
+        guard let url = URL(string: "https://mu7d7a3b5l.execute-api.ap-northeast-1.amazonaws.com/staging/images") else { return }
+        let resource = Resource<MovieCollection>(url: url)
+        
+        netWorkService.load(resource: resource) { [weak self] (movie) in
+            print(movie)
+        }
+        
     }
     
     @objc private func toggleToPreviousPage() {
