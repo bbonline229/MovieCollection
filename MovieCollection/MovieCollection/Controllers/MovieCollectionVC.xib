@@ -14,7 +14,9 @@
             <connections>
                 <outlet property="collectionView" destination="Ogo-51-01O" id="dvG-pl-Wd6"/>
                 <outlet property="containView" destination="ijq-yv-MUj" id="Chg-Rb-7I6"/>
+                <outlet property="currentPageLabel" destination="qmC-n0-f00" id="B8e-um-QlB"/>
                 <outlet property="pageControl" destination="S5x-PL-YpA" id="Pj6-kN-MKZ"/>
+                <outlet property="pageControlHeight" destination="8fv-hc-K32" id="HIv-bp-rwd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,6 +25,16 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ogo-51-01O">
+                    <rect key="frame" x="0.0" y="129.5" width="375" height="487.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="92S-Kq-z9s">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijq-yv-MUj">
                     <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -53,34 +65,33 @@
                         <constraint firstItem="zdS-u5-AeU" firstAttribute="centerY" secondItem="sNY-zS-q2p" secondAttribute="centerY" id="axp-Y6-pMU"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ogo-51-01O">
-                    <rect key="frame" x="0.0" y="95.5" width="375" height="521.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="92S-Kq-z9s">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 of 15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmC-n0-f00">
+                    <rect key="frame" x="161.5" y="100.5" width="52.5" height="24"/>
+                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Ogo-51-01O" firstAttribute="top" secondItem="qmC-n0-f00" secondAttribute="bottom" constant="5" id="1ci-L5-Gls"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ogo-51-01O" secondAttribute="trailing" id="3tO-Ia-bgL"/>
+                <constraint firstItem="qmC-n0-f00" firstAttribute="top" secondItem="sNY-zS-q2p" secondAttribute="bottom" constant="5" id="5w0-50-DMe"/>
                 <constraint firstItem="S5x-PL-YpA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Em9-pf-jsh"/>
                 <constraint firstItem="ijq-yv-MUj" firstAttribute="top" secondItem="S5x-PL-YpA" secondAttribute="bottom" id="H1r-yx-vCZ"/>
-                <constraint firstItem="Ogo-51-01O" firstAttribute="top" secondItem="sNY-zS-q2p" secondAttribute="bottom" id="HTm-zj-mwM"/>
                 <constraint firstItem="Ogo-51-01O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="K7P-aw-ALs"/>
+                <constraint firstItem="qmC-n0-f00" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b7F-fH-tdL"/>
                 <constraint firstItem="sNY-zS-q2p" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1:7" id="d4j-j4-PIA"/>
                 <constraint firstItem="ijq-yv-MUj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="g8W-tP-pQw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ijq-yv-MUj" secondAttribute="bottom" id="hSd-z8-gmi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sNY-zS-q2p" secondAttribute="trailing" id="jNE-gE-aYZ"/>
-                <constraint firstItem="ijq-yv-MUj" firstAttribute="top" secondItem="Ogo-51-01O" secondAttribute="bottom" id="orH-jB-kZF"/>
+                <constraint firstItem="Ogo-51-01O" firstAttribute="bottom" secondItem="S5x-PL-YpA" secondAttribute="top" id="ned-FG-38V"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ijq-yv-MUj" secondAttribute="trailing" id="rFy-ZT-ryx"/>
                 <constraint firstItem="sNY-zS-q2p" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="svH-Su-szx"/>
                 <constraint firstItem="sNY-zS-q2p" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zyB-cc-sHN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
 </document>

@@ -13,6 +13,8 @@ class MovieCollectionVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var containView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var currentPageLabel: UILabel!
+    @IBOutlet weak var pageControlHeight: NSLayoutConstraint!
     
     private let previousButton: UIButton = {
         let button = UIButton()
@@ -30,10 +32,55 @@ class MovieCollectionVC: UIViewController {
         return button
     }()
     
+    var currentPage: Int = 0 {
+        didSet {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setup()
+        setupPageControl(ishidden: false)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupToggleButton()
+    }
+    
+    private func setup() {
+        navigationController?.navigationBar.isHidden = true
+        
+        pageControl.currentPage = currentPage
+        pageControl.pageIndicatorTintColor = .lightBlue
+        pageControl.currentPageIndicatorTintColor = .crazyBlue
+    }
+    
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        collectionView.collectionViewLayout = layout
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    private func setupPageControl(ishidden: Bool) {
+        pageControl.isHidden = ishidden
+        pageControlHeight.constant = ishidden ? 0 : 20
+        
+        view.layoutIfNeeded()
+    }
+    
+    private func setupToggleButton() {
+        containView.addSubview(previousButton)
+        containView.addSubview(nextButton)
+        
+        previousButton.anchor(top: containView.topAnchor, leading: containView.leadingAnchor, bottom: containView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: containView.bounds.width / 2, height: 0))
+        nextButton.anchor(top: containView.topAnchor, leading: previousButton.trailingAnchor, bottom: containView.bottomAnchor, trailing: containView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 0))
     }
     
     @objc private func toggleToPreviousPage() {
