@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum MovieComponent: CaseIterable {
     case movieList
@@ -17,13 +18,21 @@ class MovieMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var movieData: [Movie] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     private let movieComponent = MovieComponent.allCases
+    private let netWorkService = NetWorkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         setupTableView()
+        requestMovies()
     }
     
     private func setup() {
@@ -37,6 +46,19 @@ class MovieMainVC: UIViewController {
         tableView.bounces = false
         tableView.register(UINib(nibName: "MovieBaseCell", bundle: nil), forCellReuseIdentifier: "MovieBaseCell")
         tableView.tableFooterView = UIView()
+    }
+    
+    private func requestMovies() {
+        guard let url = URL(string: "https://mu7d7a3b5l.execute-api.ap-northeast-1.amazonaws.com/staging/images") else { return }
+        let resource = Resource<MovieCollection>(url: url)
+        
+        netWorkService.load(resource: resource) { [weak self] (movie) in
+            guard let movie = movie else { return }
+            
+            DispatchQueue.main.async {
+                self?.movieData = movie.movieData
+            }
+        }
     }
     
     @objc private func setting() {
@@ -74,9 +96,11 @@ extension MovieMainVC: UITableViewDataSource {
         switch movieComponent[indexPath.section] {
         case .movieList:
             cell.movieSource = .hotMovie
+            cell.movieData = movieData
             return cell
         case .favoriteMovie:
             cell.movieSource = .collection
+            cell.movieData = movieData
             return cell
         }
     }
@@ -89,6 +113,7 @@ extension MovieMainVC: UITableViewDelegate {
         case .movieList:
             let vc = MovieListVC()
             vc.listSource = .hotMovie
+            vc.movieData = movieData
             navigationController?.pushViewController(vc, animated: true)
         case .favoriteMovie:
             return

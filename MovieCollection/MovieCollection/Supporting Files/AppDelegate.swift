@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initSetup() {
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         UINavigationBar.appearance().tintColor = UIColor.darkGray
         
         let vc = MovieMainVC()

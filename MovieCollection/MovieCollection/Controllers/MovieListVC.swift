@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum MovieListSource {
     case hotMovie
@@ -55,12 +56,7 @@ class MovieListVC: UIViewController {
         }
     }
     
-    var movieData: [Movie] = [] {
-        didSet {
-            print(movieData)
-            collectionView.reloadData()
-        }
-    }
+    var movieData: [Movie] = []
     
     var listSource: MovieListSource = .hotMovie
     
@@ -73,8 +69,6 @@ class MovieListVC: UIViewController {
         setup()
         setupCollectionView()
         setupPageControl(ishidden: false)
-        
-        requestMovies()
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,6 +85,9 @@ class MovieListVC: UIViewController {
         pageControl.currentPage = currentPage
         pageControl.pageIndicatorTintColor = .lightBlue
         pageControl.currentPageIndicatorTintColor = .crazyBlue
+        pageControl.numberOfPages = movieData.count
+        
+        currentPageLabel.text = "1 of \(movieData.count)"
     }
     
     private func setupCollectionView() {
@@ -119,21 +116,6 @@ class MovieListVC: UIViewController {
         
         previousButton.anchor(top: containView.topAnchor, leading: containView.leadingAnchor, bottom: containView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: containView.bounds.width / 2, height: 0))
         nextButton.anchor(top: containView.topAnchor, leading: previousButton.trailingAnchor, bottom: containView.bottomAnchor, trailing: containView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 0))
-    }
-    
-    private func requestMovies() {
-        guard let url = URL(string: "https://mu7d7a3b5l.execute-api.ap-northeast-1.amazonaws.com/staging/images") else { return }
-        let resource = Resource<MovieCollection>(url: url)
-        
-        netWorkService.load(resource: resource) { [weak self] (movie) in
-            guard let movie = movie else { return }
-            
-            DispatchQueue.main.async {
-                self?.pageControl.numberOfPages = movie.movieData.count
-                self?.currentPageLabel.text = "1 of \(movie.movieData.count)"
-                self?.movieData = movie.movieData
-            }
-        }
     }
     
     @objc private func toggleToPreviousPage() {

@@ -32,6 +32,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="movieCountLabel" destination="y5k-FA-8TH" id="YtI-cJ-5V5"/>
+            </connections>
             <point key="canvasLocation" x="95.652173913043484" y="37.834821428571423"/>
         </tableViewCell>
     </objects>

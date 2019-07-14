@@ -7,5 +7,5 @@ target 'MovieCollection' do
 
   # Pods for MovieCollection
   pod 'Kingfisher', '~> 5.0'
-
+  pod 'RealmSwift'
 end

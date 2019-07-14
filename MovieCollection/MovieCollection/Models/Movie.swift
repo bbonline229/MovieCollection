@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct MovieCollection: Codable {
+class MovieCollection: Codable {
     let movieData: [Movie]
     
     private enum CodingKeys: String, CodingKey {
@@ -16,7 +17,40 @@ struct MovieCollection: Codable {
     }
 }
 
-struct Movie: Codable {
-    let title: String
-    let url: String
+class Movie: Object, Codable {
+    @objc dynamic var title = ""
+    @objc dynamic var url = ""
+}
+
+extension Movie {
+    convenience init(title: String, url: String) {
+        self.init()
+        
+        self.title = title
+        self.url = url
+    }
+}
+
+extension Movie {
+    func save(in realm: Realm = try! Realm()) {
+        do {
+            try realm.write {
+                realm.add(self)
+            }
+        } catch {
+            print("Realm save error: \(error)")
+        }
+    }
+    
+    func delete() {
+        guard let realm = realm else {return}
+        
+        do {
+            try realm.write {
+                realm.delete(self)
+            }
+        } catch {
+            print("Realm delete error: \(error)")
+        }
+    }
 }

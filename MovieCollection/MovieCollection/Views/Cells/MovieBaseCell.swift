@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MovieBaseCell: UITableViewCell {
+    
+    @IBOutlet weak var movieCountLabel: UILabel!
     
     var movieSource: MovieListSource = .hotMovie {
         didSet {
             textLabel?.text = movieSource.displayName
+        }
+    }
+    
+    var movieData: [Movie] = [] {
+        didSet {
+            movieCountLabel.text = "\(movieData.count)"
         }
     }
 
