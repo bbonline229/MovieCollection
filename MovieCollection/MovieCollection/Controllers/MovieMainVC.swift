@@ -28,18 +28,20 @@ class MovieMainVC: UIViewController {
     
     private func setup() {
         navigationItem.title = "首頁"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "設定", style: .done, target: self, action: #selector(setting))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Setting-Small"), style: .done, target: self, action: #selector(setting))
     }
     
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.bounces = false
         tableView.register(UINib(nibName: "MovieBaseCell", bundle: nil), forCellReuseIdentifier: "MovieBaseCell")
         tableView.tableFooterView = UIView()
     }
     
     @objc private func setting() {
-        
+        let vc = MovieSettingVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }

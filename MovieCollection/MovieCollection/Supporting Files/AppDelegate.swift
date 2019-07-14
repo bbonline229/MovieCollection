@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initSetup() {
+        UINavigationBar.appearance().tintColor = UIColor.darkGray
+        
         let vc = MovieMainVC()
         let mainNav = UINavigationController(rootViewController: vc)
         
