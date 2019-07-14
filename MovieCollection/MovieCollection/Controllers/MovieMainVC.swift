@@ -38,24 +38,14 @@ class MovieMainVC: UIViewController {
 
         setup()
         setupTableView()
+        setupActivityView()
+        requestMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        setupActivityView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        requestMovies()
     }
     
     private func setup() {
@@ -89,7 +79,10 @@ class MovieMainVC: UIViewController {
     
     private func setupActivityView() {
         view.addSubview(spinner)
-        spinner.center = view.center
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     private func startLoading() {
