@@ -32,6 +32,15 @@ extension Movie {
 }
 
 extension Movie {
+    static func likeMovie(in realm: Realm = try! Realm(), query: String) -> Results<Movie>? {
+        let predicate = NSPredicate(format: "title=%@", query)
+        return realm.objects(Movie.self).filter(predicate)
+    }
+    
+    static func alllikeMovie(in realm: Realm = try! Realm()) -> Results<Movie> {
+        return realm.objects(Movie.self)
+    }
+    
     func save(in realm: Realm = try! Realm()) {
         do {
             try realm.write {

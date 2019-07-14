@@ -37,7 +37,7 @@ class MovieMainVC: UIViewController {
     
     private func setup() {
         navigationItem.title = "首頁"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Setting-Small"), style: .done, target: self, action: #selector(setting))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Setting"), style: .done, target: self, action: #selector(setting))
     }
     
     private func setupTableView() {
@@ -100,7 +100,7 @@ extension MovieMainVC: UITableViewDataSource {
             return cell
         case .favoriteMovie:
             cell.movieSource = .collection
-            cell.movieData = movieData
+            cell.movieData = Array(Movie.alllikeMovie())
             return cell
         }
     }
@@ -109,14 +109,17 @@ extension MovieMainVC: UITableViewDataSource {
 
 extension MovieMainVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MovieListVC()
+        
         switch  movieComponent[indexPath.section] {
         case .movieList:
-            let vc = MovieListVC()
             vc.listSource = .hotMovie
             vc.movieData = movieData
-            navigationController?.pushViewController(vc, animated: true)
         case .favoriteMovie:
-            return
+            vc.listSource = .collection
+            vc.movieData = Array(Movie.alllikeMovie())
         }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

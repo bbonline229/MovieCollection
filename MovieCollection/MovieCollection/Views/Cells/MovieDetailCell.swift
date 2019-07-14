@@ -11,6 +11,7 @@ import Kingfisher
 
 class MovieDetailCell: UICollectionViewCell {
 
+    @IBOutlet weak var likeImageView: UIImageView!
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
@@ -18,6 +19,9 @@ class MovieDetailCell: UICollectionViewCell {
         didSet {
             movieNameLabel.text = movie.title
             movieImageView.kf.setImage(with: URL(string: movie.url))
+            
+            let likeMovie = Movie.likeMovie(query: movie.title)?.first
+            likeImageView.image = (likeMovie != nil) ? #imageLiteral(resourceName: "Icon_Like") : #imageLiteral(resourceName: "Icon-Unlike")
         }
     }
     
@@ -25,7 +29,25 @@ class MovieDetailCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        likeImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleLike)))
+        likeImageView.isUserInteractionEnabled = true
+    }
+    
+    func checkLike() -> Bool {
+        let like = Movie.likeMovie(query: movie.title)?.first
         
+        if let like = like {
+            like.delete()
+            return false
+        } else {
+            let likeMovie = Movie(title: movie.title, url: movie.url)
+            likeMovie.save()
+            return true
+        }
+    }
+    
+    @objc func toggleLike() {
+        likeImageView.image = checkLike() ? #imageLiteral(resourceName: "Icon_Like") : #imageLiteral(resourceName: "Icon-Unlike")
     }
 
 }
