@@ -20,6 +20,10 @@ class MovieCollection: Codable {
 class Movie: Object, Codable {
     @objc dynamic var title = ""
     @objc dynamic var url = ""
+    
+    var titleDescription: String {
+        return "片名: \(title)"
+    }
 }
 
 extension Movie {

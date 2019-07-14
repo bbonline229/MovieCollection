@@ -17,7 +17,7 @@ class MovieDetailCell: UICollectionViewCell {
     
     var movie: Movie! {
         didSet {
-            movieNameLabel.text = movie.title
+            movieNameLabel.text = movie.titleDescription
             movieImageView.kf.setImage(with: URL(string: movie.url))
             
             let likeMovie = Movie.likeMovie(query: movie.title)?.first
