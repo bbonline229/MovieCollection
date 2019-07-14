@@ -49,6 +49,9 @@
                         <constraint firstAttribute="height" id="8fv-hc-K32"/>
                     </constraints>
                     <color key="pageIndicatorTintColor" red="0.48627450979999998" green="0.80392156859999997" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="pageNavigate:" destination="-1" eventType="touchUpInside" id="DnC-mE-Raa"/>
+                    </connections>
                 </pageControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sNY-zS-q2p">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="95.5"/>
@@ -59,10 +62,23 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80n-8d-CHU">
+                            <rect key="frame" x="20" y="27.5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="aJo-7j-9yr"/>
+                                <constraint firstAttribute="width" constant="40" id="rJQ-Ef-Svv"/>
+                            </constraints>
+                            <state key="normal" image="Icon_Return"/>
+                            <connections>
+                                <action selector="goBack:" destination="-1" eventType="touchUpInside" id="7Mm-nl-288"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.32941176470588235" green="0.57647058823529407" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="80n-8d-CHU" firstAttribute="centerY" secondItem="sNY-zS-q2p" secondAttribute="centerY" id="BSS-79-Drw"/>
                         <constraint firstItem="zdS-u5-AeU" firstAttribute="centerX" secondItem="sNY-zS-q2p" secondAttribute="centerX" id="I3A-Yl-ZDp"/>
+                        <constraint firstItem="80n-8d-CHU" firstAttribute="leading" secondItem="sNY-zS-q2p" secondAttribute="leading" constant="20" id="IiA-bC-u13"/>
                         <constraint firstItem="zdS-u5-AeU" firstAttribute="centerY" secondItem="sNY-zS-q2p" secondAttribute="centerY" id="axp-Y6-pMU"/>
                     </constraints>
                 </view>
@@ -95,4 +111,7 @@
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
+    <resources>
+        <image name="Icon_Return" width="60" height="60"/>
+    </resources>
 </document>

@@ -50,7 +50,8 @@ class MovieListVC: UIViewController {
     
     var currentPage: Int = 0 {
         didSet {
-            collectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0), at: .centeredHorizontally, animated: true)
+            let animated = abs(currentPage - oldValue) > 1 ? false : true
+            collectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0), at: .centeredHorizontally, animated: animated)
             pageControl.currentPage = currentPage
             self.currentPageLabel.text = "\(currentPage + 1) of \(movieData.count)"
         }
@@ -59,6 +60,7 @@ class MovieListVC: UIViewController {
     var movieData: [Movie] = []
     
     var listSource: MovieListSource = .hotMovie
+    let settingMode = StorageService.instance.settingMode
     
     
     private let netWorkService = NetWorkService()
@@ -75,6 +77,16 @@ class MovieListVC: UIViewController {
         super.viewDidLayoutSubviews()
         
         setupToggleButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     private func setup() {
@@ -119,17 +131,29 @@ class MovieListVC: UIViewController {
     }
     
     @objc private func toggleToPreviousPage() {
-        if currentPage == 0 { return }
+        if currentPage == 0 {
+            if settingMode == .infinite { currentPage = movieData.count - 1 }
+            return
+        }
         currentPage -= 1
     }
     
     @objc private func toggleToNextPage() {
         if currentPage == movieData.count - 1 {
+            if settingMode == .infinite { currentPage = 0 }
             return
         }
         currentPage += 1
     }
-
+    
+    @IBAction func pageNavigate(_ sender: UIPageControl) {
+        currentPage = sender.currentPage
+    }
+    
+    @IBAction func goBack(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 extension MovieListVC: UICollectionViewDataSource {
