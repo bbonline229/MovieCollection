@@ -56,16 +56,18 @@ class MovieListVC: UIViewController {
         return button
     }()
     
-    var currentPage: Int = 0 {
+    var movieData: [Movie] = []
+    
+    var page: Page! {
         didSet {
-            let animated = abs(currentPage - oldValue) > 1 ? false : true
-            collectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0), at: .centeredHorizontally, animated: animated)
-            pageControl.currentPage = currentPage
-            self.currentPageLabel.text = "\(currentPage + 1) of \(movieData.count)"
+            guard let _ = oldValue else { return }
+            
+            let animated = abs(page.currentPageIndex - oldValue.currentPageIndex) > 1 ? false : true
+            collectionView.scrollToItem(at: IndexPath(item: page.currentPageIndex, section: 0), at: .centeredHorizontally, animated: animated)
+            pageControl.currentPage = page.currentPageIndex
+            self.currentPageLabel.text = page.pageDescription
         }
     }
-    
-    var movieData: [Movie] = []
     
     var listSource: MovieListSource = .hotMovie
     let settingMode = StorageService.instance.settingMode
@@ -78,7 +80,6 @@ class MovieListVC: UIViewController {
 
         setup()
         setupCollectionView()
-        setupPageControl(ishidden: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,12 +103,15 @@ class MovieListVC: UIViewController {
         
         listTitleLabel.text = listSource.displayName
         
-        pageControl.currentPage = currentPage
+        page = Page(currentPageIndex: 0, totalPage: movieData.count)
+        
+        pageControl.currentPage = page.currentPageIndex
         pageControl.pageIndicatorTintColor = .lightBlue
         pageControl.currentPageIndicatorTintColor = .crazyBlue
         pageControl.numberOfPages = movieData.count
+        setupPageControl(ishidden: movieData.count <= 1)
         
-        currentPageLabel.text = "1 of \(movieData.count)"
+        currentPageLabel.text = page.pageDescription
     }
     
     private func setupCollectionView() {
@@ -144,19 +148,11 @@ class MovieListVC: UIViewController {
     }
     
     @objc private func toggleToPreviousPage() {
-        if currentPage == 0 {
-            if settingMode == .infinite { currentPage = movieData.count - 1 }
-            return
-        }
-        currentPage -= 1
+        page.toggleToPreviousPage(with: settingMode)
     }
     
     @objc private func toggleToNextPage() {
-        if currentPage == movieData.count - 1 {
-            if settingMode == .infinite { currentPage = 0 }
-            return
-        }
-        currentPage += 1
+        page.toggleToNextPage(with: settingMode)
     }
     
     @objc private func toggleDone() {
@@ -164,7 +160,7 @@ class MovieListVC: UIViewController {
     }
     
     @IBAction func pageNavigate(_ sender: UIPageControl) {
-        currentPage = sender.currentPage
+        page.currentPageIndex = sender.currentPage
     }
     
     @IBAction func goBack(_ sender: UIButton) {
@@ -198,6 +194,6 @@ extension MovieListVC: UICollectionViewDelegateFlowLayout {
         let x = scrollView.contentOffset.x
         let w = scrollView.bounds.size.width
         let currentPage = Int(ceil(x/w))
-        self.currentPage = currentPage
+        page.currentPageIndex = currentPage
     }
 }
