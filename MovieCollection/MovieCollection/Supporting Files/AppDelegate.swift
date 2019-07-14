@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initSetup() {
-        let vc = MovieCollectionVC()
+        let vc = MovieMainVC()
         let mainNav = UINavigationController(rootViewController: vc)
         
         window =  UIWindow(frame: UIScreen.main.bounds)

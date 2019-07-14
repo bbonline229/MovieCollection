@@ -10,13 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieCollectionVC" customModule="MovieCollection" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieListVC" customModule="MovieCollection" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="Ogo-51-01O" id="dvG-pl-Wd6"/>
-                <outlet property="containView" destination="ijq-yv-MUj" id="Chg-Rb-7I6"/>
-                <outlet property="currentPageLabel" destination="qmC-n0-f00" id="B8e-um-QlB"/>
-                <outlet property="pageControl" destination="S5x-PL-YpA" id="Pj6-kN-MKZ"/>
-                <outlet property="pageControlHeight" destination="8fv-hc-K32" id="HIv-bp-rwd"/>
+                <outlet property="collectionView" destination="Ogo-51-01O" id="nUy-pw-hpR"/>
+                <outlet property="containView" destination="ijq-yv-MUj" id="WS4-iB-zfN"/>
+                <outlet property="currentPageLabel" destination="qmC-n0-f00" id="OPa-mw-WaV"/>
+                <outlet property="listTitleLabel" destination="zdS-u5-AeU" id="oux-UU-88S"/>
+                <outlet property="pageControl" destination="S5x-PL-YpA" id="5eR-M6-hfg"/>
+                <outlet property="pageControlHeight" destination="8fv-hc-K32" id="3t0-v2-90r"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

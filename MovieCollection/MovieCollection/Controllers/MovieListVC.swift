@@ -8,8 +8,23 @@
 
 import UIKit
 
-class MovieCollectionVC: UIViewController {
+enum MovieListSource {
+    case hotMovie
+    case collection
+    
+    var displayName: String {
+        switch self {
+        case .hotMovie:
+            return "熱門電影"
+        default:
+            return "我的收藏"
+        }
+    }
+}
 
+class MovieListVC: UIViewController {
+
+    @IBOutlet weak var listTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var containView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -47,6 +62,9 @@ class MovieCollectionVC: UIViewController {
         }
     }
     
+    var listSource: MovieListSource = .hotMovie
+    
+    
     private let netWorkService = NetWorkService()
     
     override func viewDidLoad() {
@@ -67,6 +85,8 @@ class MovieCollectionVC: UIViewController {
     
     private func setup() {
         navigationController?.navigationBar.isHidden = true
+        
+        listTitleLabel.text = listSource.displayName
         
         pageControl.currentPage = currentPage
         pageControl.pageIndicatorTintColor = .lightBlue
@@ -130,7 +150,7 @@ class MovieCollectionVC: UIViewController {
 
 }
 
-extension MovieCollectionVC: UICollectionViewDataSource {
+extension MovieListVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movieData.count
     }
@@ -142,7 +162,7 @@ extension MovieCollectionVC: UICollectionViewDataSource {
     }
 }
 
-extension MovieCollectionVC: UICollectionViewDelegateFlowLayout {
+extension MovieListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
