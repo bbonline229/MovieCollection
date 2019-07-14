@@ -18,6 +18,12 @@ class MovieMainVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var spinner: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView()
+        activityView.style = .gray
+        return activityView
+    }()
+    
     var movieData: [Movie] = [] {
         didSet {
             tableView.reloadData()
@@ -32,13 +38,24 @@ class MovieMainVC: UIViewController {
 
         setup()
         setupTableView()
-        requestMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupActivityView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        requestMovies()
     }
     
     private func setup() {
@@ -58,13 +75,31 @@ class MovieMainVC: UIViewController {
         guard let url = URL(string: "https://mu7d7a3b5l.execute-api.ap-northeast-1.amazonaws.com/staging/images") else { return }
         let resource = Resource<MovieCollection>(url: url)
         
+        startLoading()
+        
         netWorkService.load(resource: resource) { [weak self] (movie) in
             guard let movie = movie else { return }
             
             DispatchQueue.main.async {
+                self?.stopLoading()
                 self?.movieData = movie.movieData
             }
         }
+    }
+    
+    private func setupActivityView() {
+        view.addSubview(spinner)
+        spinner.center = view.center
+    }
+    
+    private func startLoading() {
+        spinner.startAnimating()
+        spinner.isHidden = false
+    }
+    
+    private func stopLoading() {
+        spinner.stopAnimating()
+        spinner.isHidden = true
     }
     
     @objc private func setting() {

@@ -44,6 +44,7 @@ class MovieSettingVC: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.bounces = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tableViewCell")
     }
 
