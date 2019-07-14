@@ -35,6 +35,12 @@ class MovieMainVC: UIViewController {
         requestMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     private func setup() {
         navigationItem.title = "首頁"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Setting"), style: .done, target: self, action: #selector(setting))
@@ -116,8 +122,13 @@ extension MovieMainVC: UITableViewDelegate {
             vc.listSource = .hotMovie
             vc.movieData = movieData
         case .favoriteMovie:
+            let allLikeMovie = Array(Movie.alllikeMovie())
+            if allLikeMovie.isEmpty {
+                popupAlert(title: "提示", message: "目前尚無收藏電影", actionTitles: ["確定"], actionStyle: [.default], action: [nil])
+                return
+            }
             vc.listSource = .collection
-            vc.movieData = Array(Movie.alllikeMovie())
+            vc.movieData = allLikeMovie
         }
         
         navigationController?.pushViewController(vc, animated: true)

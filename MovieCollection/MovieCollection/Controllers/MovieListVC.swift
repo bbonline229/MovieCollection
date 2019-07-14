@@ -48,6 +48,14 @@ class MovieListVC: UIViewController {
         return button
     }()
     
+    let doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("完成", for: .normal)
+        button.backgroundColor = .crazyBlue
+        button.addTarget(self, action: #selector(toggleDone), for: .touchUpInside)
+        return button
+    }()
+    
     var currentPage: Int = 0 {
         didSet {
             let animated = abs(currentPage - oldValue) > 1 ? false : true
@@ -123,11 +131,16 @@ class MovieListVC: UIViewController {
     }
     
     private func setupToggleButton() {
-        containView.addSubview(previousButton)
-        containView.addSubview(nextButton)
+        if movieData.count == 1 {
+            containView.addSubview(doneButton)
+            doneButton.fillSuperview()
+        } else {
+            containView.addSubview(previousButton)
+            containView.addSubview(nextButton)
         
-        previousButton.anchor(top: containView.topAnchor, leading: containView.leadingAnchor, bottom: containView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: containView.bounds.width / 2, height: 0))
-        nextButton.anchor(top: containView.topAnchor, leading: previousButton.trailingAnchor, bottom: containView.bottomAnchor, trailing: containView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 0))
+            previousButton.anchor(top: containView.topAnchor, leading: containView.leadingAnchor, bottom: containView.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: containView.bounds.width / 2, height: 0))
+            nextButton.anchor(top: containView.topAnchor, leading: previousButton.trailingAnchor, bottom: containView.bottomAnchor, trailing: containView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 0))
+        }
     }
     
     @objc private func toggleToPreviousPage() {
@@ -144,6 +157,10 @@ class MovieListVC: UIViewController {
             return
         }
         currentPage += 1
+    }
+    
+    @objc private func toggleDone() {
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func pageNavigate(_ sender: UIPageControl) {
