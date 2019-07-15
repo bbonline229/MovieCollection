@@ -48,7 +48,7 @@ class MovieListVC: UIViewController {
         return button
     }()
     
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let button = UIButton()
         button.setTitle("完成", for: .normal)
         button.backgroundColor = .crazyBlue
@@ -64,6 +64,7 @@ class MovieListVC: UIViewController {
             
             let animated = abs(page.currentPageIndex - oldValue.currentPageIndex) > 1 ? false : true
             collectionView.scrollToItem(at: IndexPath(item: page.currentPageIndex, section: 0), at: .centeredHorizontally, animated: animated)
+            
             pageControl.currentPage = page.currentPageIndex
             self.currentPageLabel.text = page.pageDescription
         }

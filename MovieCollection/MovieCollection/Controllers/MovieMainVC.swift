@@ -68,10 +68,14 @@ class MovieMainVC: UIViewController {
         startLoading()
         
         netWorkService.load(resource: resource) { [weak self] (movie) in
-            guard let movie = movie else { return }
-            
             DispatchQueue.main.async {
                 self?.stopLoading()
+                
+                guard let movie = movie else {
+                    self?.popupAlert(title: "提示", message: "資料庫異常, 請稍後再試", actionTitles: ["確定"], actionStyle: [.default], action: [nil])
+                    return
+                }
+                
                 self?.movieData = movie.movieData
             }
         }
@@ -134,7 +138,7 @@ extension MovieMainVC: UITableViewDataSource {
             return cell
         case .favoriteMovie:
             cell.movieSource = .collection
-            cell.movieData = Array(Movie.alllikeMovie())
+            cell.movieData = Array(Movie.allLikeMovie())
             return cell
         }
     }
@@ -147,10 +151,14 @@ extension MovieMainVC: UITableViewDelegate {
         
         switch  movieComponent[indexPath.section] {
         case .movieList:
+            if movieData.isEmpty {
+                popupAlert(title: "提示", message: "目前尚無電影資訊", actionTitles: ["確定"], actionStyle: [.default], action: [nil])
+                return
+            }
             vc.listSource = .hotMovie
             vc.movieData = movieData
         case .favoriteMovie:
-            let allLikeMovie = Array(Movie.alllikeMovie())
+            let allLikeMovie = Array(Movie.allLikeMovie())
             if allLikeMovie.isEmpty {
                 popupAlert(title: "提示", message: "目前尚無收藏電影", actionTitles: ["確定"], actionStyle: [.default], action: [nil])
                 return

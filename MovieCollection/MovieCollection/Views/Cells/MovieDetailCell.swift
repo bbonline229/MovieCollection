@@ -33,7 +33,7 @@ class MovieDetailCell: UICollectionViewCell {
         likeImageView.isUserInteractionEnabled = true
     }
     
-    func checkLike() -> Bool {
+    private func checkLike() -> Bool {
         let like = Movie.likeMovie(query: movie.title)?.first
         
         if let like = like {
@@ -46,7 +46,7 @@ class MovieDetailCell: UICollectionViewCell {
         }
     }
     
-    @objc func toggleLike() {
+    @objc private func toggleLike() {
         likeImageView.image = checkLike() ? #imageLiteral(resourceName: "Icon_Like") : #imageLiteral(resourceName: "Icon-Unlike")
     }
 

@@ -15,6 +15,11 @@ struct Resource<T: Decodable> {
 class NetWorkService {
     func load<T>(resource: Resource<T>, completion: @escaping (T?) -> Void) {
         URLSession.shared.dataTask(with: resource.url) { data, response, error in
+            if let error = error {
+                print(error)
+                completion(nil)
+            }
+            
             guard let data = data else { return }
             
             do {

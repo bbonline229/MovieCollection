@@ -26,9 +26,9 @@ class MovieSettingVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let settings = Setting.allCases
+    private let settings = Setting.allCases
     
-    let settingMode = StorageService.instance.settingMode
+    private let settingMode = StorageService.instance.settingMode
     
     override func viewDidLoad() {
         super.viewDidLoad()

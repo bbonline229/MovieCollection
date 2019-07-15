@@ -41,7 +41,7 @@ extension Movie {
         return realm.objects(Movie.self).filter(predicate)
     }
     
-    static func alllikeMovie(in realm: Realm = try! Realm()) -> Results<Movie> {
+    static func allLikeMovie(in realm: Realm = try! Realm()) -> Results<Movie> {
         return realm.objects(Movie.self)
     }
     
